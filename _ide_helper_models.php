@@ -18,6 +18,8 @@ namespace App{
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Stock[] $stock
+ * @property-read int|null $stock_count
  * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product query()
@@ -33,11 +35,51 @@ namespace App{
 /**
  * App\Retailer
  *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Stock[] $stock
+ * @property-read int|null $stock_count
  * @method static \Illuminate\Database\Eloquent\Builder|Retailer newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Retailer newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Retailer query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Retailer whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Retailer whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Retailer whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Retailer whereUpdatedAt($value)
  */
 	class Retailer extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\Stock
+ *
+ * @property int $id
+ * @property int $product_id
+ * @property int $retailer_id
+ * @property int $price
+ * @property string|null $sku
+ * @property string $url
+ * @property bool $in_stock
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Retailer $retailer
+ * @method static \Illuminate\Database\Eloquent\Builder|Stock newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Stock newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Stock query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Stock whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stock whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stock whereInStock($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stock wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stock whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stock whereRetailerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stock whereSku($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stock whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stock whereUrl($value)
+ */
+	class Stock extends \Eloquent {}
 }
 
 namespace App{

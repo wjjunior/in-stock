@@ -36,8 +36,22 @@ class TrackCommand extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): void
     {
-        Product::all()->each->track();
+        $products = Product::all();
+
+        // start a progress bar
+        $this->output->progressStart($products->count());
+
+        // tack each product while ticking the progress bar
+        $products->each(function ($product) {
+            $product->track();
+            $this->output->progressAdvance();
+        });
+
+        // finish the progress bar to 100%
+        $this->output->progressFinish();
+        // output the result as a table
+        $this->info("All done!");
     }
 }
